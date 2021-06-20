@@ -1,6 +1,7 @@
 ﻿@page
 @model OdeToFood.Pages.Restaurants.ListModel
 @{
+    ViewData["Title"] = "Restaurants ";
 }
 
 <h1>Restaurants</h1>
@@ -18,16 +19,30 @@
     </div>
 </form>
 
-<table class="table">
+@*<table class="table">
     @foreach (var restaurant in Model.Restaurants)
     {
-        <tr>
-            <td>@restaurant.Name</td>
-            <td>@restaurant.Location</td>
-            <td>@restaurant.Cuisine</td>
-            <td><a asp-page="./Details" asp-route-RestaurantId="@restaurant.Id" class="btn btn-info">Details</a> </td>
-            <td><a asp-page="./Edit" asp-route-RestaurantId="@restaurant.Id" class="btn btn-primary">Edit</a> </td>
-        </tr>
+    <tr>
+        <td>@restaurant.Name</td>
+        <td>@restaurant.Location</td>
+        <td>@restaurant.Cuisine</td>
+        <td>
+            <a asp-page="./Details" asp-route-RestaurantId="@restaurant.Id" class="btn btn-info">Details</a>
+            <a asp-page="./Edit" asp-route-RestaurantId="@restaurant.Id" class="btn btn-primary">Edit</a>
+            <a asp-page="./Delete" asp-route-RestaurantId="@restaurant.Id" class="btn btn-primary">Delete</a>
+        </td>
+    </tr>
     }
-</table>
+</table>*@
+
+@foreach (var restaurant in Model.Restaurants)
+{
+    <partial name="_SummaryPartial" model="restaurant" />
+}
+
+
 <a asp-page="./Edit" class="btn btn-warning">Add New</a>
+
+@section footer {
+<p>Hello Footer</p>
+}

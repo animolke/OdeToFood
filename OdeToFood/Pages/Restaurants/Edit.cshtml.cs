@@ -22,7 +22,7 @@ namespace OdeToFood.Pages.Restaurants
         }
 
         [BindProperty] //create a parameter that can store data from post actions
-        public Restaurant Restaurant { get; set; }
+        public Restaurant Restaurant { get; set; }  
         [TempData]
         public string Message { get; set; }
         public IEnumerable<SelectListItem> Cuisines { get; set; }
@@ -55,12 +55,15 @@ namespace OdeToFood.Pages.Restaurants
                 return Page();
             }
 
-            if (!(Restaurant.Id > 0))
+            if (Restaurant.Id > 0)
             {
                 restaurantData.Update(Restaurant);
             }
-            restaurantData.Add(Restaurant);
-            TempData["Message"] = "Resturant Saved!";
+            else
+            {
+                restaurantData.Add(Restaurant);
+                TempData["Message"] = "Resturant Saved!";
+            }
             restaurantData.Commit();
             return RedirectToPage("./Details", new { restaurantId = Restaurant.Id });
         }
